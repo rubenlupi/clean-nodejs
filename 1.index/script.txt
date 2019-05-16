@@ -1,0 +1,19 @@
+https://github.com/ryanmcdermott/clean-code-javascript
+https://github.com/airbnb/javascript
+https://google.github.io/styleguide/jsguide.html
+https://github.com/rwaldron/idiomatic.js/
+https://github.com/standard/standard
+
+
+Intro
+Modo estricto
+Variables
+Functions
+Objects and Data Structures
+Classes
+SOLID
+Testing
+Concurrency
+Error Handling
+Formatting
+Linters

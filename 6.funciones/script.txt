@@ -1,0 +1,125 @@
+DIAPO
+-------------
+No más de dos argumentos por función
+
+Limitar la cantidad de parámetros de la función es increíblemente importante porque facilita la prueba de su función. Tener más de una conversación entre ellos.
+
+Uno o dos argumentos es el caso ideal, y tres deben evitarse si es posible. Cualquier cosa más que eso debería ser consolidada. Generalmente, si tiene más de dos argumentos,
+entonces su función está tratando de hacer demasiado. En los casos en que no lo sea, la mayor parte del tiempo en un objeto de nivel superior será suficiente como argumento.
+
+Ya que JavaScript te permite hacer objetos a partir de volantes, sin usar una placa de repetición, puedes usarlo si buscas muchos argumentos.
+
+DIAPO
+-------------
+Usar destructuring en funciones
+
+Cuando alguien mira la firma de la función, queda inmediatamente claro qué propiedades se están utilizando.
+
+La destrucción también clona los valores primitivos especificados del objeto de argumento pasado a la función. Esto puede ayudar a prevenir los efectos secundarios.
+Notas: los objetos y matrices que se desestructuran a partir del objeto argumento NO se clonan.
+Los linters pueden advertirle sobre las propiedades no utilizadas, lo que sería imposible sin desestructurarlo.
+
+Bad:
+
+function createMenu(title, body, buttonText, cancellable) {
+  // ...
+}
+Good:
+
+function createMenu({ title, body, buttonText, cancellable }) {
+  // ...
+}
+
+createMenu({
+  title: "Foo",
+  body: "Bar",
+  buttonText: "Baz",
+  cancellable: true
+});
+
+DIAPO
+-------------
+Las funciones hacen una sola cosa!!!
+
+Esta es, con mucho, la regla más importante en la ingeniería de software. Cuando hacen más de una cosa, son más difíciles de componer, probar y razonar.
+Cuando puede aislar una función a una sola acción, se puede refaccionar fácilmente y su código se leerá mucho más limpio. Estarás delante de muchos desarrolladores.
+
+DIAPO
+-------------
+Los nombres de las funciones deben especificar lo que hacen.
+
+Bad:
+
+function addToDate(date, month) {
+  // ...
+}
+
+const date = new Date();
+
+// It's hard to tell from the function name what is added
+addToDate(date, 1);
+Good:
+
+function addMonthToDate(month, date) {
+  // ...
+}
+
+const date = new Date();
+addMonthToDate(1, date);
+
+
+DIAPO
+-------------
+Elimina el código duplicado. No programes haciendo copiar y pegar.
+El código duplicado es malo porque significa que hay más de un lugar que tendrás que cambiar si necesita cambiar algo de lógica.
+Además el código duplicado suele tener pequeñas modificaciones que lo hacen cada vez más dificil de seguir, porque cada lógica cambia con pequeñas lineas de código
+
+DIAPO
+-------------
+No usar flags en las funciones. Eso quiere decir que hace más de una cosa y además crece exponencialmente la complejidad
+
+Bad:
+
+function createFile(name, temp) {
+  if (temp) {
+    fs.create(`./temp/${name}`);
+  } else {
+    fs.create(name);
+  }
+}
+Good:
+
+function createFile(name) {
+  fs.create(name);
+}
+
+function createTempFile(name) {
+  createFile(`./temp/${name}`);
+}
+
+DIAPO
+-------------
+
+DIAPO
+-------------
+
+DIAPO
+-------------
+
+DIAPO
+-------------
+
+DIAPO
+-------------
+
+DIAPO
+-------------
+
+DIAPO
+-------------
+
+DIAPO
+-------------
+
+DIAPO
+-------------

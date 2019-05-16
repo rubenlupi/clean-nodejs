@@ -1,0 +1,12 @@
+DIAPO
+------
+Qué es el hoisting
+
+DIAPO
+------
+Qué es block-scoped
+
+DIAPO
+------
+Qué es el destructuring
+

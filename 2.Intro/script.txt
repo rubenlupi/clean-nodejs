@@ -1,0 +1,92 @@
+Diapo 0
+-----------
+Clean code se basa en el libro
+-Software engineering principles, from Robert C. Martin's book Clean Code (uncle bob), adapted for JavaScript
+
+Qué debería ser el buen código
+El lenguaje en el que expresamos los requisitos de una manera clara, concisa y revisable.
+El código limpio se caracteriza por ser elegante, eficaz, legible, mínimo, hacer solo una cosa bien de una única manera y tener pruebas unitarias.
+
+Qué es el mal código
+Todo lo contrario, todo lo que no es codigo limpio.
+Pero lo peor es lo que genera el mal código
+
+
+La responsabilidad del código limpio es 100% de los programadores, su labor es defenderlo y negarse a hacer código incorrecto
+
+Diapo 1
+--------
+No existe un standard de clean code, pero si alguna guías de referencia que es importante conocer.
+-Clean Code de Robert C. Martin's adaptado a Javascript
+-Airbnb
+-Google
+-Idiomatic
+-JavascriptJs
+
+Diapo 2
+-----------
+ Hay gente que se lo toma como una biblia, la referencia de todo lo bueno y lo malo en OOP. Veremos otras estrategia
+
+- No toca demasiado diseño y arquitectura. Eso no es nada malo, pero debido al punto anterior he visto gente descuidando el diseño
+por centrarse únicamente en la legibilidad del código y los tests.
+
+- Es la base del movimiento Software Craftmanship
+
+-Yo soy ingeniero, hago mi trabajo y tomo decisiones lo mejor posible en función del tiempo y del coste.
+Intento escribir buen código porque estoy convencido de que es la mejor forma de entregar calidad a tiempo.
+Pero mi trabajo es entregar software, no enamorar con mi código.
+
+Diapo 3
+----------
+http://manifesto.softwarecraftsmanship.org/
+
+
+Como aspirantes a creadores de software, estamos elevando el nivel de desarrollo de software profesional al practicar y ayudar a otros a aprender el oficio. A través de este trabajo hemos llegado a valorar:
+
+No solo software de trabajo, pero también software bien hecho
+No solo respondiendo al cambio, pero también añadiendo valor constantemente
+No solo individuos e interacciones, sino también una comunidad de profesionales.
+No solo la colaboración del cliente, pero también asociaciones productivas
+Es decir, en la búsqueda de los elementos de la izquierda, hemos encontrado que los elementos de la derecha son indispensables.
+
+Diapo 4 - Airbnb
+----------
+Disponible en https://github.com/airbnb/javascript
+Airbnb tiene una de las guías de estilo de JavaScript más populares en Internet.
+Cubre casi todos los aspectos de JavaScript.
+Las versiones en idiomas distintos al inglés suelen estar algo desactualizadas.
+Es interesante porque no sólo te muestra su guía sino también el porque lo hacen así.
+
+Diapo 5 - Google
+---------
+Disponible en https://google.github.io/styleguide/jsguide.html
+Google es uno de los grandes, crea escuela y de hecho tiene una universidad
+Un archivo fuente de JavaScript se describe como que está en el estilo de Google si y solo si cumple con las reglas de este documento.
+
+A pesar de ser demasiado extenso también es muy interesante conocerlo
+
+A diferencia de Airbnb es una guía que no explica el porqué de esas deciciones. Está claro que son decisiones acertadas, pero
+desde mi punto de vista los documentos deberían incluir algo más de pedagogía. Otros pensarán que es sintético y conciso lo cual
+también es muy valorable
+
+Diapo 6 - Idiomatic
+--------
+Disponible en https://github.com/rwaldron/idiomatic.js/
+Lema: Todo el código en cualquier base de código debe verse como si una sola persona lo hubiera escrito, sin importar cuántas personas hayan contribuido.
+Otra de las guías de estilo de JavaScript más populares, la Guía idiomática está disponible en varios idiomas y está abierta para contribuir en ella.
+Se han adherido a este documento grandes desarrolladores
+No sólo es una guía de estilo, también hay recomendaciones sobre que herramientas de estilo y de testing utilizar
+Desde mi punto de vista se centra demasiado en los estilos, algo que es interesante pero en algunos otros aspectos está desactualizada, se sigue utilizando var en los ejemplos.
+No parece que haya mucha actividad, el último commit es de enero
+
+Diapo 7 - JavascriptJs
+--------
+Disponible en: https://standardjs.com/
+Una de las básicas, puesto que está desarrollado por javascript, es decir, es un standard
+De las más cómodas para utilizar
+JavaScript style guide, linter, y formatter
+
+
+
+
+

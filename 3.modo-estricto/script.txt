@@ -1,0 +1,194 @@
+Transitioning to strict mode
+
+
+DIAPO
+---------
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
+
+Modo Estricto => 'use strict' vs sloppy mode (modo descuidado)
+-Introducido en ECMAScript 5
+-Los navegadores que no admiten el modo estricto ejecutarán el código de modo estricto con un comportamiento diferente al de los navegadores que sí lo hacen
+-Sloppy mode es como se denominma de forma común al código que no es estricto
+-El modo estricto hace que sea más fácil escribir JavaScript "seguro".
+-Las futuras versiones de ECMAScript introducirán nuevos cambios, y el modo estricto en ECMAScript 5 aplica algunos de esos cambios para hacer una transición más suave.
+-El modo estricto cambia la "sintaxis incorrecta" en errores reales.
+-El modo estricto hace varios cambios a la semántica normal de JavaScript
+    -Corrige errores que dificultan que los motores de JavaScript realicen optimizaciones, es decir,
+    el código de modo estricto puede ejecutarse más rápido que el código idéntico que no es modo estricto
+    -Prohíbe cierta sintaxis que probablemente se definirá en futuras versiones de ECMAScript
+-Strict mode puede actuar a nivel de script, función o módulo
+
+DIAPO
+------
+El modo estricto simplifica la forma en que los nombres de las variables se asignan a definiciones de variables particulares en el código.
+Muchas optimizaciones del compilador se basan en la capacidad de decir que la variable X se almacena en esa ubicación
+JavaScript no es posible realizar hasta el tiempo de ejecución. El modo estricto elimina la mayoría de los casos donde esto sucede
+
+DIAPO
+---------
+-A nivel de script
+    -No es recomendable
+    -Esta sintaxis tiene una trampa: si concatenamos un script de modo estricto con un script de modo no estricto: ¡toda la concatenación parece estricta!
+    -Lo inverso también es cierto: no estricto más estricto, no estricto.
+    -La concatentación de scripts nunca es ideal, pero si se hace se recomienda contenera en una función estricta para scripts estrictos y una función no estricta para scripts no estrictos
+
+-A nivel de función
+-A nivel de módulo. ECMAScript 2015 introdujo módulos de JavaScript y, por lo tanto, el contenido completo de JavaScript está en modo estricto,
+sin que se necesite una declaración para iniciarlo.
+
+DIAPO
+---------
+El modo estricto hace que sea imposible crear accidentalmente variables globales
+
+'use strict';
+                       // Assuming a global variable mistypedVariable exists
+mistypeVariable = 17;  // this line throws a ReferenceError due to the
+                       // misspelling of variable
+
+
+DIAPO
+---------
+El modo estricto da asignaciones que de otro modo fallarían silenciosamente para lanzar una excepción
+
+'use strict';
+
+// Assignment to a non-writable global
+var undefined = 5; // throws a TypeError
+
+// Assignment to a non-writable property
+var obj1 = {};
+Object.defineProperty(obj1, 'x', { value: 42, writable: false });
+obj1.x = 9; // throws a TypeError
+
+// Assignment to a getter-only property
+var obj2 = { get x() { return 17; } };
+obj2.x = 5; // throws a TypeError
+
+// Assignment to a new property on a non-extensible object
+var fixed = {};
+Object.preventExtensions(fixed);
+fixed.newProp = 'ohai'; // throws a TypeError
+
+DIAPO
+---------
+El modo estricto lanza excepción si se elimina las propiedades no eliminables
+'use strict';
+delete Object.prototype; // throws a TypeError
+
+DIAPO
+---------
+Los nombres de propiedades duplicados son un error de sintaxis en modo estricto
+'use strict';
+var o = { p: 1, p: 2 }; // !!! syntax error
+
+DIAPO
+---------
+El modo estricto requiere que los nombres de los parámetros de función sean únicos
+'use strict'
+function sum(a, a, c) { // !!! syntax error
+  'use strict';
+  return a + a + c; // wrong if this code ran
+}
+
+DIAPO
+---------
+Strict mode prohibe sintaxis octal
+'use strict'
+var a = 0o10; // ES2015: Octal
+
+DIAPO
+---------
+El modo estricto prohíbe establecer propiedades en valores primitivos.
+Sin el modo estricto, las propiedades de configuración simplemente se ignoran (no-op), con el modo estricto, sin embargo, se lanza un TypeError.
+(function() {
+'use strict';
+
+false.true = '';         // TypeError
+(14).sailing = 'home';   // TypeError
+'with'.you = 'far away'; // TypeError
+
+})();
+
+DIAPO
+---------
+Strict mode prohibe el uso de with
+Google JavaScript Style Guide - 5.10.1 with - Do not use the with keyword. It makes your code harder to understand and has been banned in strict mode since ES5.
+
+
+DIAPO
+---------
+La evaluación del código (eval) de modo estricto no introduce nuevas variables en el ámbito circundante.
+El modo estricto ofrece un gran paso al tratar eval y arguments como palabras clave,
+var x = 17;
+var evalX = eval("'use strict'; var x = 42; x;");
+console.assert(x === 17);
+console.assert(evalX === 42);
+
+DIAPO
+---------
+
+'use strict';
+
+var x;
+delete x; // !!! syntax error
+
+eval('var y; delete y;'); // !!! syntax error
+
+DIAPO
+---------
+En modo estricto no es posible "recorrer" el stack de JavaScript a través de extensiones de ECMAScript.
+En código normal con estas extensiones, cuando una función llamada fun está en medio de su ejecución, fun.caller es la función que más recientemente llamó a fun,
+y fun.arguments son los paremetros para esa invocación de fun. Ambas extensiones son problematicas para JavaScript "seguro", debido a que permite acceder a funciones "privilegiadas"
+y sus argumentos. Si fun está en modo estricto, ambos fun.caller y fun.arguments lanzan una excepción cuando son llamadas.
+
+function restricted()
+{
+  "use strict";
+  restricted.caller;    // throws a TypeError
+  restricted.arguments; // throws a TypeError
+}
+function privilegedInvoker()
+{
+  return restricted();
+}
+privilegedInvoker();
+
+DIAPO
+--------
+en funciones de modo estricto, el objeto arguments no proveé acceso a las variables usadas al llamar a la función.
+En algunas implementaciones viejas del ECMAScript, arguments.caller era un objeto cuyas propiedades apuntaban a las variables en la función.
+Esto es una amenaza de seguridad por que rompe la habilidad de ocultar valores privilegiados a través de la abstracción de la función; además frena algunas optimizaciones.
+Por estas razones los navegadores modernos no la implementan. Por su funcionalidad a lo largo de los años, arguments.caller en una función de modo estricto
+es una propiedad que lanza una excepción cuando es usada.
+
+"use strict";
+function fun(a, b)
+{
+  "use strict";
+  var v = 12;
+  return arguments.caller; // throws a TypeError
+}
+fun(1, 2); // doesn't expose v (or a or b)
+
+DIAPO
+--------
+En modo estricto una lista de identificadores se convierten en palabras reservadas.
+Estas palabras son implements, interface, let, package, private, protected, public, static, y yield.
+ De modo que en modo estricto, no se pueden usar estas palabras para nombrar variables o como argumentos.
+
+function package(protected){ // !!!
+  "use strict";
+  var implements; // !!!
+
+  interface: // !!!
+  while (true){
+    break interface; // !!!
+  }
+
+  function private() { } // !!!
+}
+function fun(static) { 'use strict'; } // !!!
+
+
+A pesar de que por defecto un módulo de ES6 es estricto en nodejs no es así porque node usa commonjs (en próximas versiones usará es6)
+http://imaginativethinking.ca/what-the-heck-is-node-modules-strict-by-default/
